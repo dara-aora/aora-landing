@@ -1,8 +1,7 @@
 import { Nav } from "@/components/Nav";
-import { ArchitectureScroll } from "@/components/ArchitectureScroll";
+import { VideoHero } from "@/components/VideoHero";
 import { ChromeExtensionSection } from "@/components/ChromeExtensionSection";
 import { StatSection } from "@/components/StatSection";
-import { SocialProofStrip } from "@/components/SocialProofStrip";
 import { MeasuresSection } from "@/components/MeasuresSection";
 import { ScienceTeaser } from "@/components/ScienceTeaser";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -14,18 +13,12 @@ export default function Home() {
       <Nav />
       <main>
         {/*
-          ArchitectureScroll is the opening act: a Neuralink-style pinned
-          section (1000vh) with a large centered PCB photograph that stays
-          fixed on screen. As the user scrolls, one of nine overlay zones
-          on the PCB lights up in green (bracket corners + soft glow) and a
-          text panel on the left crossfades to reveal that layer's name,
-          summary, included components, and physical appearance. One scroll
-          gesture ≈ one layer (Sensor → Analog → Filtering → Processing →
-          Memory → Wireless → Power → Grounding → Mechanical), reinforced
-          by proximity snap markers. Handoff gradient at the bottom fades
-          into the ChromeExtensionSection that follows.
+          VideoHero opens the page with `aora-hero.mp4` scroll-scrubbed
+          behind a pinned copy layer. A tagline card cross-fades into
+          the eight anatomy "notes" one at a time as the user scrolls,
+          then unpins directly into the Chrome extension section below.
         */}
-        <ArchitectureScroll />
+        <VideoHero />
 
         {/*
           ChromeExtensionSection introduces the companion software layer
@@ -35,7 +28,6 @@ export default function Home() {
         <ChromeExtensionSection />
 
         <StatSection />
-        <SocialProofStrip />
         <MeasuresSection />
         <ScienceTeaser />
         <FinalCTA />

@@ -61,7 +61,7 @@ const BEATS = [
   {
     key: "buy",
     kicker: "The device",
-    headline: "The device. $200.",
+    headline: "The device. $199.",
     range: [0.86, 0.9, 1.0, 1.0] as const,
   },
 ] as const;
@@ -204,7 +204,8 @@ export function ProductHero() {
         <h1>Aora Nano</h1>
         <p>
           A behind-the-ear wearable with continuous ECG, PPG, and early neural
-          potential sensing. On-device processing. Low power. Always on. $200.
+          potential sensing. On-device processing. Low power. Always on. $199.
+          Founder membership from $10/month.
         </p>
       </div>
     </section>
@@ -264,8 +265,17 @@ function Beat({
 
         {isLast && (
           <div className="mt-10 md:mt-14 flex flex-col items-center gap-4 pointer-events-auto">
+            <p
+              className="font-display font-light text-[15px] md:text-[17px] leading-snug"
+              style={{ color: "var(--paper)" }}
+            >
+              Membership $10/month.{" "}
+              <span style={{ color: "var(--mute)" }}>
+                First 100 founders — locked for life. $20/month after.
+              </span>
+            </p>
             <a
-              href="https://buy.stripe.com/bJe6oI9Sgfu1cCF1TC8so09"
+              href="https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
@@ -289,7 +299,7 @@ function Beat({
                   "var(--green)")
               }
             >
-              Pre-order
+              Order
               <span aria-hidden>→</span>
             </a>
             <SmallCaps>
@@ -417,8 +427,17 @@ function ProductHeroMobile() {
 
             {i === BEATS.length - 1 && (
               <div className="mt-8 flex flex-col items-center gap-4">
+                <p
+                  className="font-display font-light text-[14px] leading-snug"
+                  style={{ color: "var(--paper)" }}
+                >
+                  Membership $10/month.{" "}
+                  <span style={{ color: "var(--mute)" }}>
+                    First 100 founders — locked for life. $20/month after.
+                  </span>
+                </p>
                 <a
-                  href="https://buy.stripe.com/bJe6oI9Sgfu1cCF1TC8so09"
+                  href="https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => {
@@ -435,7 +454,7 @@ function ProductHeroMobile() {
                     borderRadius: 4,
                   }}
                 >
-                  Pre-order
+                  Order
                   <span aria-hidden>→</span>
                 </a>
                 <SmallCaps>
@@ -452,7 +471,8 @@ function ProductHeroMobile() {
         <h1>Aora Nano</h1>
         <p>
           A behind-the-ear wearable with continuous ECG, PPG, and early neural
-          potential sensing. On-device processing. Low power. Always on. $200.
+          potential sensing. On-device processing. Low power. Always on. $199.
+          Founder membership from $10/month.
         </p>
       </div>
     </section>

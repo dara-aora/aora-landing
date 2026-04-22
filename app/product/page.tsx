@@ -10,7 +10,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 export const metadata: Metadata = {
   title: "Aora Nano — The device",
   description:
-    "Aora Nano is a behind-the-ear wearable with continuous ECG, PPG, and early neural-potential sensing. On-device processing. Low power. Always on. $200.",
+    "Aora Nano is a behind-the-ear wearable with continuous ECG, PPG, and early neural-potential sensing. On-device processing. Low power. Always on. $199. Founder membership from $10/month.",
   openGraph: {
     title: "Aora Nano — The device",
     description:

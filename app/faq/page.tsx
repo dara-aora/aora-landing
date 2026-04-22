@@ -155,11 +155,12 @@ const FAQS: QA[] = [
   {
     index: "09",
     category: "Pricing",
-    question: "Is there a subscription?",
+    question: "How does pricing work?",
     answer: (
       <>
-        No subscription for core measurement. You own the hardware and the
-        data it generates.
+        The device is $199, one-time. Membership is $10/month for the first
+        100 founders — locked for life — and $20/month after. Your membership
+        keeps the data model improving and the Chrome extension synced.
       </>
     ),
   },

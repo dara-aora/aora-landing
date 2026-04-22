@@ -28,7 +28,7 @@ export function Footer() {
               className="mt-6 max-w-xs font-display text-lg leading-snug"
               style={{ color: "var(--mute)" }}
             >
-              A measurement instrument for the organ you haven&apos;t measured yet.
+              Power up your brain
             </p>
           </div>
 
