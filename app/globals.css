@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0a0a;
+  --ink-raised: #141414;
+  --paper: #f4f2ec;
+  --mute: #8a8a8a;
+  --rule: #1f1f1f;
+
+  --green: #6e8b3d;
+  --green-bright: #8fae5a;
+  --green-tint: rgba(110, 139, 61, 0.08);
+}
+
+html,
+body {
+  background-color: var(--ink);
+  color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ── Scroll-snap ─────────────────────────────────────────────────────
+ * Each major section on the landing and product pages carries the
+ * `.snap-section` class. We use `proximity` universally so the snap
+ * engine only nudges the user near a section boundary — it never
+ * forcibly yanks them out of a tall pinned-scroll section like the
+ * AnatomyHero (horizontal card strip) or ProductHero, which are
+ * intentionally NOT snap targets.
+ *
+ * Inside tall pinned zones like AnatomyHero we drop `.snap-beat`
+ * markers — one per card in the horizontal strip — spaced evenly
+ * across the section's vertical scroll range. Proximity +
+ * `scroll-snap-stop: normal` means the browser softly nudges the
+ * user to a fully-centered card at rest — never yanks mid-scroll.
+ * One deliberate scroll gesture ≈ one card advance.
+ *
+ * `scroll-padding-top` keeps the top edge of the snapped section
+ * below the fixed Nav (h-16 on mobile, h-20 on md+).
+ */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 80px;
+}
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: 100vh;
+}
+/* Thin invisible rest-points used inside tall pinned scroll zones
+   (like AnatomyHero's 9-card horizontal strip). When the user stops
+   scrolling, proximity snap softly nudges them to the nearest
+   marker — each marker corresponds to a card centered on screen. */
+.snap-beat {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  height: 1px;
+  width: 1px;
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--green);
+  color: var(--ink);
+}
+
+/* Thin hairline utility */
+.hairline {
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Small caps typographic primitive */
+.small-caps {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+  font-weight: 500;
+}
+
+/* 1Hz pulse for live-data dots */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+
+.live-dot {
+  animation: live-pulse 1s ease-in-out infinite;
+}
+
+/* Subtle scroll-hint pulse on the arrow/line */
+@keyframes scroll-hint {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+}
+
+.scroll-hint {
+  animation: scroll-hint 2.4s ease-in-out infinite;
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--green-bright);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-snap-type: none !important;
+  }
+  .snap-section,
+  .snap-beat {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+}
+
+/* Vignette used over the sticky video */
+.video-vignette {
+  background: radial-gradient(
+      ellipse at center,
+      rgba(10, 10, 10, 0) 0%,
+      rgba(10, 10, 10, 0.55) 70%,
+      rgba(10, 10, 10, 0.9) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(10, 10, 10, 0.3) 0%,
+      rgba(10, 10, 10, 0) 25%,
+      rgba(10, 10, 10, 0) 75%,
+      rgba(10, 10, 10, 0.6) 100%
+    );
+}

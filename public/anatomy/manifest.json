@@ -1,0 +1,149 @@
+{
+  "source": "source.jpg",
+  "sourceSize": {
+    "w": 1280,
+    "h": 853
+  },
+  "layers": [
+    {
+      "n": 1,
+      "slug": "top-cover",
+      "name": "Top Cover",
+      "file": "layer-1-top-cover.png",
+      "size": {
+        "w": 520,
+        "h": 130
+      },
+      "source": {
+        "x": 310,
+        "y": 40,
+        "w": 520,
+        "h": 130
+      },
+      "core": {
+        "top": 20,
+        "bottom": 100
+      }
+    },
+    {
+      "n": 2,
+      "slug": "coil",
+      "name": "Wireless Charging Coil",
+      "file": "layer-2-coil.png",
+      "size": {
+        "w": 520,
+        "h": 100
+      },
+      "source": {
+        "x": 310,
+        "y": 170,
+        "w": 520,
+        "h": 100
+      },
+      "core": {
+        "top": 10,
+        "bottom": 80
+      }
+    },
+    {
+      "n": 3,
+      "slug": "battery",
+      "name": "Battery",
+      "file": "layer-3-battery.png",
+      "size": {
+        "w": 520,
+        "h": 120
+      },
+      "source": {
+        "x": 310,
+        "y": 255,
+        "w": 520,
+        "h": 120
+      },
+      "core": {
+        "top": 10,
+        "bottom": 95
+      }
+    },
+    {
+      "n": 4,
+      "slug": "main-pcb",
+      "name": "Main PCB",
+      "file": "layer-4-main-pcb.png",
+      "size": {
+        "w": 520,
+        "h": 135
+      },
+      "source": {
+        "x": 310,
+        "y": 355,
+        "w": 520,
+        "h": 135
+      },
+      "core": {
+        "top": 15,
+        "bottom": 110
+      }
+    },
+    {
+      "n": 5,
+      "slug": "internal-frame",
+      "name": "Internal Frame",
+      "file": "layer-5-internal-frame.png",
+      "size": {
+        "w": 520,
+        "h": 100
+      },
+      "source": {
+        "x": 310,
+        "y": 498,
+        "w": 520,
+        "h": 100
+      },
+      "core": {
+        "top": 10,
+        "bottom": 78
+      }
+    },
+    {
+      "n": 6,
+      "slug": "sensor-layer",
+      "name": "Sensor Layer",
+      "file": "layer-6-sensor-layer.png",
+      "size": {
+        "w": 520,
+        "h": 115
+      },
+      "source": {
+        "x": 310,
+        "y": 595,
+        "w": 520,
+        "h": 115
+      },
+      "core": {
+        "top": 10,
+        "bottom": 93
+      }
+    },
+    {
+      "n": 7,
+      "slug": "bottom-cover",
+      "name": "Bottom Cover",
+      "file": "layer-7-bottom-cover.png",
+      "size": {
+        "w": 520,
+        "h": 115
+      },
+      "source": {
+        "x": 310,
+        "y": 720,
+        "w": 520,
+        "h": 115
+      },
+      "core": {
+        "top": 10,
+        "bottom": 92
+      }
+    }
+  ]
+}
