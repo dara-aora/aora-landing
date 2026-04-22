@@ -11,3 +11,4 @@ next-env.d.ts
 # Source video (large). Compressed outputs in public/video/ are shipped.
 /Upscale.mp4
 
+.env*.local
