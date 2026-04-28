@@ -9,19 +9,18 @@ import { useEffect, useRef } from "react";
 import { SmallCaps } from "./SmallCaps";
 
 /**
- * VideoHero — Single-viewport hero, scroll-scrubbed to 50%.
+ * VideoHero — Single-viewport hero, scroll-scrubbed through the
+ * second half of the clip (75 % → 100 %).
  *
  * `aora-hero.mp4` is paused. A rAF loop (gated by `seeked`, same
  * pattern as `StickyVideo.tsx`) maps the user's scroll position
- * across this 100svh section to `video.currentTime`, clamped to
- * the first half of the clip. Scrolling down advances playback;
- * scrolling back up rewinds. When the user stops scrolling the
- * video freezes on its current frame. There is no autoplay, no
- * loop, and no replay — once you scroll past the hero the video
- * stays parked at its halfway frame.
+ * across this 100svh section to `video.currentTime`, starting at
+ * 75 % of the clip and scrubbing to 100 %. Scrolling down advances
+ * playback; scrolling back up rewinds. When the user stops
+ * scrolling the video freezes on its current frame. There is no
+ * autoplay, no loop, and no replay.
  *
- * Section is exactly one viewport tall so there is zero blackspace
- * tail before the next section.
+ * A dark overlay sits on top of the video for legibility.
  *
  * Source MP4 should be encoded all-intra for smooth frame-accurate
  * scrubbing; otherwise seeks between keyframes can stutter.
@@ -30,9 +29,8 @@ import { SmallCaps } from "./SmallCaps";
 const VIDEO_SRC = "/video/aora-hero.mp4";
 const POSTER_SRC = "/video/aora-poster.jpg";
 
-// Fraction of the source clip we expose. 0.65 = scrolling through
-// the hero reaches ~two-thirds of the way through the clip.
-const MAX_PROGRESS = 0.75;
+const START_PROGRESS = 0.75;
+const MAX_PROGRESS = 1.0;
 
 export function VideoHero() {
   const reduced = useReducedMotion();
@@ -70,13 +68,20 @@ export function VideoHero() {
     };
     v.addEventListener("seeked", onSeeked);
 
+    const onLoaded = () => {
+      v.currentTime = v.duration * START_PROGRESS;
+    };
+    if (v.readyState >= 1) onLoaded();
+    else v.addEventListener("loadedmetadata", onLoaded, { once: true });
+
     const tick = () => {
       const duration = v.duration;
       if (duration && Number.isFinite(duration)) {
         const p = scrollYProgress.get();
+        const range = MAX_PROGRESS - START_PROGRESS;
         const target = Math.max(
-          0,
-          Math.min(duration * MAX_PROGRESS, p * duration * MAX_PROGRESS),
+          START_PROGRESS * duration,
+          Math.min(duration * MAX_PROGRESS, START_PROGRESS * duration + p * duration * range),
         );
         if (!seeking) {
           const current = v.currentTime;
@@ -100,6 +105,7 @@ export function VideoHero() {
     return () => {
       cancelAnimationFrame(rafId);
       v.removeEventListener("seeked", onSeeked);
+      v.removeEventListener("loadedmetadata", onLoaded);
     };
   }, [reduced, scrollYProgress]);
 
@@ -132,8 +138,15 @@ export function VideoHero() {
         <source src={VIDEO_SRC} type="video/mp4" />
       </video>
 
+{/* Dark overlay — uniform tint for second-half footage. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{ backgroundColor: "rgba(10,10,10,0.55)" }}
+      />
+
       {/* Legibility vignette — keeps copy readable without ever
-          darkening the whole video. */}
+           darkening the whole video. */}
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
@@ -160,15 +173,7 @@ export function VideoHero() {
             </h1>
             <div className="mt-5 md:mt-6 max-w-[560px]">
               <SmallCaps className="block" tone="paper">
-                <span className="block text-[10px] md:text-[11px]">
-                  Burnout Is Inevitable
-                </span>
-                <span className="block mt-2">
-                  In the pursuit of peak performance, a mental fatigue is your
-                  biggest liability
-                </span>
-                <span className="block mt-2">Stop Crashing</span>
-                <span className="block mt-2">Start Thriving</span>
+                Mental fatigue is your biggest liability
               </SmallCaps>
               <a
                 href="https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b"

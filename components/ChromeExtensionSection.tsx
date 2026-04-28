@@ -11,9 +11,9 @@ const CHROME_STORE_URL =
 /**
  * ChromeExtensionSection — Standalone software beat.
  *
- * Positioned directly after the AnatomyHero (PCB reveal) and before the
- * 73% stat. Introduces the AORA Chrome extension as a standalone product
- * (the software version of AORA) that runs in the browser today, and
+ * Positioned after the blog/ScienceTeaser and before FinalCTA.
+ * Introduces the AORA Chrome extension as a standalone product (no
+ * hardware commitment required) that runs in the browser today, and
  * optionally pairs with the AORA Nano device for continuous biosignal
  * tracking. Funnels to the Chrome Web Store listing.
  *
@@ -58,6 +58,15 @@ export function ChromeExtensionSection() {
                   wherever you work.
                 </span>
               </h2>
+            </FadeUp>
+
+            <FadeUp delay={0.12}>
+              <p
+                className="mt-4 font-mono text-[11px] md:text-xs tracking-[0.18em] uppercase"
+                style={{ color: "var(--green-bright)" }}
+              >
+                No hardware required. Start with the software.
+              </p>
             </FadeUp>
 
             <FadeUp delay={0.15}>

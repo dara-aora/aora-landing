@@ -1,7 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { VideoHero } from "@/components/VideoHero";
 import { ChromeExtensionSection } from "@/components/ChromeExtensionSection";
-import { StatSection } from "@/components/StatSection";
+
 import { MeasuresSection } from "@/components/MeasuresSection";
 import { ScienceTeaser } from "@/components/ScienceTeaser";
 import { FinalCTA } from "@/components/FinalCTA";
@@ -20,16 +20,18 @@ export default function Home() {
         */}
         <VideoHero />
 
+        
+        <MeasuresSection />
+        <ScienceTeaser />
+
         {/*
-          ChromeExtensionSection introduces the companion software layer
-          that surfaces real-time cognitive state in the browser and funnels
-          to the Chrome Web Store listing.
+          ChromeExtensionSection introduces the standalone software layer
+          that surfaces real-time cognitive state in the browser — no
+          hardware commitment required — and funnels to the Chrome Web
+          Store listing.
         */}
         <ChromeExtensionSection />
 
-        <StatSection />
-        <MeasuresSection />
-        <ScienceTeaser />
         <FinalCTA />
       </main>
       <Footer />
