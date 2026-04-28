@@ -157,7 +157,7 @@ export function VideoHero() {
       />
 
       {/* Copy layer */}
-      <div className="relative h-full w-full flex flex-col justify-center px-6 md:px-10">
+      <div className="relative h-full w-full flex flex-col justify-start pt-[58vh] px-6 md:px-10">
         <div className="mx-auto w-full max-w-content">
           <motion.div
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}

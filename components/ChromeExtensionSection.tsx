@@ -11,7 +11,7 @@ const CHROME_STORE_URL =
 /**
  * ChromeExtensionSection — Standalone software beat.
  *
- * Positioned after the blog/ScienceTeaser and before FinalCTA.
+ * Positioned after the FinalCTA preorder section.
  * Introduces the AORA Chrome extension as a standalone product (no
  * hardware commitment required) that runs in the browser today, and
  * optionally pairs with the AORA Nano device for continuous biosignal

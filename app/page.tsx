@@ -3,6 +3,7 @@ import { VideoHero } from "@/components/VideoHero";
 import { ChromeExtensionSection } from "@/components/ChromeExtensionSection";
 
 import { MeasuresSection } from "@/components/MeasuresSection";
+import { HowItWorks } from "@/components/HowItWorks";
 import { ScienceTeaser } from "@/components/ScienceTeaser";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
@@ -22,7 +23,21 @@ export default function Home() {
 
         
         <MeasuresSection />
+
+        {/*
+          HowItWorks: scroll-scrubbed video with 9 crossfading architecture
+          layers. Positioned after MeasuresSection so the user first sees
+          what AORA measures, then how the device achieves it.
+        */}
+        <HowItWorks />
+
         <ScienceTeaser />
+
+        {/*
+          FinalCTA: "Measure the one thing you can't afford to lose."
+          Preorder call-to-action for AORA Nano.
+        */}
+        <FinalCTA />
 
         {/*
           ChromeExtensionSection introduces the standalone software layer
@@ -31,8 +46,6 @@ export default function Home() {
           Store listing.
         */}
         <ChromeExtensionSection />
-
-        <FinalCTA />
       </main>
       <Footer />
     </>
