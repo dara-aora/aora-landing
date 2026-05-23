@@ -67,19 +67,21 @@ const BEATS = [
 ] as const;
 
 export function ProductHero() {
+  // Thin dispatcher — keeps hooks order stable across breakpoint flips
+  // by mounting completely separate subtrees for mobile vs. desktop.
+  const isMobile = useIsMobile();
+  return isMobile ? <ProductHeroMobile /> : <ProductHeroDesktop />;
+}
+
+function ProductHeroDesktop() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const reduced = useReducedMotion();
-  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end end"],
   });
-
-  if (isMobile) {
-    return <ProductHeroMobile />;
-  }
 
   // Video layer transforms (mirrors StickyVideo feel).
   const scale = useTransform(scrollYProgress, [0, 1], [1.0, 1.18]);
@@ -112,7 +114,7 @@ export function ProductHero() {
       style={{ height: `${PIN_VH}vh`, backgroundColor: "var(--ink)" }}
       aria-label="Aora Nano — device overview"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         {/* Poster fallback — always rendered behind the <video> so
             the user never sees a black rectangle while the mp4 is
             still buffering. Once the video has a decoded frame it
@@ -398,6 +400,11 @@ function ProductHeroMobile() {
           disablePictureInPicture
           poster="/video/aora-poster.jpg"
         >
+          <source
+            src="/video/aora-hero.mobile.mp4"
+            type="video/mp4"
+            media="(max-width: 768px)"
+          />
           <source src="/video/aora-hero.mp4" type="video/mp4" />
         </video>
         <div className="video-vignette absolute inset-0" />

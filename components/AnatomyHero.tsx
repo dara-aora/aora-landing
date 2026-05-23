@@ -10,6 +10,7 @@ import {
 } from "framer-motion";
 import { useRef, useState } from "react";
 import { SmallCaps } from "./SmallCaps";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 /**
  * AnatomyHero — System architecture reveal.
@@ -227,6 +228,15 @@ const REGION_POS: Record<Region, { cx: number; cy: number; label: string }> =
 // ─── Top-level component ─────────────────────────────────────────────────
 
 export function AnatomyHero() {
+  // Mobile: 900vh pinned zone is fatiguing on phones, and the layered
+  // SVG callouts are sized for desktop. Render the static stacked
+  // fallback (already authored as ReducedMotionHero) on phones.
+  const isMobile = useIsMobile();
+  if (isMobile) return <ReducedMotionHero />;
+  return <AnatomyHeroDesktop />;
+}
+
+function AnatomyHeroDesktop() {
   const reduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement | null>(null);
 
@@ -264,7 +274,7 @@ export function AnatomyHero() {
       style={{ height: `${PIN_VH}vh`, backgroundColor: "var(--ink)" }}
       aria-label="Aora Nano system architecture"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         <HeroTagline progress={scrollYProgress} />
 
         <LayerRail active={active} progress={scrollYProgress} />

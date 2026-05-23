@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useEEG } from "@/lib/eeg/useEEG";
 import type { StateKey, Scores } from "@/lib/eeg/types";
+import { DesktopOnlyGate } from "@/components/DesktopOnlyGate";
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * AORA · Neural Monitor · Live
@@ -450,6 +451,17 @@ function LegendSwatch({ color, label }: { color: string; label: string }) {
 // Main page
 // ═════════════════════════════════════════════════════════════════════════
 export default function LivePage() {
+  return (
+    <DesktopOnlyGate
+      title="Open on desktop"
+      body="The Aora live monitor pairs with a Muse or OpenBCI headset and is designed for a larger screen. Please open this page on a desktop or laptop browser."
+    >
+      <LivePageInner />
+    </DesktopOnlyGate>
+  );
+}
+
+function LivePageInner() {
   const eeg = useEEG();
   const [selectedDriver, setSelectedDriver] = useState<"muse" | "ganglion">("muse");
   const [showSettings, setShowSettings] = useState(false);

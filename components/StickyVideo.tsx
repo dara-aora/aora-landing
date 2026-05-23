@@ -175,6 +175,14 @@ export function StickyVideo({ children, pinVh = 300 }: Props) {
             disablePictureInPicture
             poster="/video/aora-poster.jpg"
           >
+            {/* Mobile-optimized variant first — browsers pick the
+                first <source> whose media query matches. If the
+                file isn't generated, the next source is used. */}
+            <source
+              src="/video/aora-hero.mobile.mp4"
+              type="video/mp4"
+              media="(max-width: 768px)"
+            />
             <source src="/video/aora-hero.mp4" type="video/mp4" />
           </video>
           <div className="video-vignette absolute inset-0 pointer-events-none" />
@@ -196,7 +204,7 @@ export function StickyVideo({ children, pinVh = 300 }: Props) {
     >
       {/* Pinned video layer */}
       <div
-        className="sticky top-0 h-screen w-full overflow-hidden"
+        className="sticky top-0 h-[100svh] w-full overflow-hidden"
         aria-hidden="true"
       >
         <motion.div

@@ -134,7 +134,7 @@ export function AnatomySection() {
       aria-labelledby="anatomy-heading"
     >
       {/* Sticky stage */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         {/* Kicker / heading at top */}
         <div className="absolute top-8 md:top-12 left-0 right-0 z-30 px-6 md:px-10 pointer-events-none">
           <FadeUp>

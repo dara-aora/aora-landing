@@ -28,7 +28,7 @@ export const QuizAnswerButton = forwardRef<HTMLButtonElement, Props>(
         type="button"
         onClick={onClick}
         aria-pressed={selected}
-        className="group w-full h-[64px] flex items-center gap-4 px-5 md:px-6 text-left transition-colors duration-150 focus:outline-none"
+        className="group w-full min-h-[64px] py-3 flex items-center gap-4 px-5 md:px-6 text-left transition-colors duration-150 focus:outline-none"
         style={{
           border: `1px solid ${
             selected ? "var(--green)" : "var(--rule)"

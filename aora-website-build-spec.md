@@ -32,7 +32,7 @@ Not "wellness consumers." Specifically:
 
 ## 2. Brand positioning
 
-**One-line positioning:** *A Whoop for your brain.*
+**One-line positioning:** *Power Up Your Mind.*
 
 **Core insight:** People track sleep, steps, HRV, and glucose — but the organ that runs all of it is invisible. Aora measures cognitive load, recovery, and burnout risk the way Whoop measures strain and recovery.
 
@@ -568,7 +568,7 @@ Display each as a simple horizontal bar on the result page, 0–100, with a gree
 
 ### Hero headlines — pick one, A/B test
 - You track your sleep. You track your steps. You've never tracked the organ that runs both.
-- A Whoop for your brain.
+- Power Up Your Mind.
 - The first wearable built for the organ that runs everything.
 - Measure the one thing you can't afford to lose.
 

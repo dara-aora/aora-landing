@@ -167,7 +167,7 @@ function DesktopSection({ reduced }: { reduced: boolean }) {
         AORA Nano — inside the device
       </h2>
 
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="sticky top-0 h-[100svh] w-full overflow-hidden">
         {/* ── Pan + zoom image layer (full labeled PCB diagram) ── */}
         <motion.div
           aria-hidden="true"

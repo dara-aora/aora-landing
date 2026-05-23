@@ -818,7 +818,7 @@ export default function RealtimeMonitoringPage() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: bg,
+      minHeight: "100dvh", background: bg,
       display: "flex", justifyContent: "center", transition: "background 1.2s ease",
     }}>
       <style>{`
@@ -832,7 +832,7 @@ export default function RealtimeMonitoringPage() {
       `}</style>
 
       <div style={{
-        width: "100%", maxWidth: 460, minHeight: "100vh",
+        width: "100%", maxWidth: 460, minHeight: "100dvh",
         display: "flex", flexDirection: "column",
         fontFamily: "'DM Mono',monospace", background: "transparent",
       }}>
@@ -1071,7 +1071,7 @@ export default function RealtimeMonitoringPage() {
             <div style={{ flex: 1 }} />
 
             {/* Stop button */}
-            <div style={{ padding: "16px 24px 24px" }}>
+            <div style={{ padding: "16px 24px max(24px, env(safe-area-inset-bottom))" }}>
               <button onClick={stopAndSave} style={{
                 width: "100%", padding: "16px 0", borderRadius: 14, cursor: "pointer",
                 background: "rgba(255,96,96,0.12)", border: "1px solid rgba(255,96,96,0.45)",

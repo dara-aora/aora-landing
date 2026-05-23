@@ -84,10 +84,10 @@ export default function BlogPage() {
   return (
     <>
       <Nav />
-      <main className="min-h-screen">
+      <main className="min-h-[100dvh]">
         {/* ═══════════════════ Block 1 · Hero masthead ═══════════════════ */}
         <section
-          className="relative px-6 md:px-10 pt-36 md:pt-48 pb-24 md:pb-32 min-h-[70vh] flex flex-col justify-end overflow-hidden"
+          className="relative px-6 md:px-10 pt-36 md:pt-48 pb-24 md:pb-32 min-h-[70svh] flex flex-col justify-end overflow-hidden"
           style={{ backgroundColor: "var(--ink)" }}
           aria-labelledby="blog-heading"
         >

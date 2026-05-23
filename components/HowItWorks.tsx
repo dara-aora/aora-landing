@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SmallCaps } from "./SmallCaps";
+import { useIsMobile } from "@/lib/useIsMobile";
 
 const VIDEO_SRC = "/video/aora-howitworks.mp4";
 
@@ -190,6 +191,15 @@ function LayerCard({
 }
 
 export function HowItWorks() {
+  // Dispatcher: mobile gets the static stacked fallback (same as
+  // reduced-motion users) — scroll-scrubbed video is unreliable on
+  // iOS Safari and the 500vh pin zone is fatiguing on phones.
+  const isMobile = useIsMobile();
+  if (isMobile) return <HowItWorksReduced />;
+  return <HowItWorksDesktop />;
+}
+
+function HowItWorksDesktop() {
   const reduced = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);

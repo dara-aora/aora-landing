@@ -50,7 +50,10 @@ export function Hero() {
 
       {/* Scroll hint */}
       <div
-        className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-hint"
+        className="absolute left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-hint"
+        style={{
+          bottom: "max(1.5rem, env(safe-area-inset-bottom))",
+        }}
         aria-hidden
       >
         <SmallCaps>Scroll</SmallCaps>

@@ -278,6 +278,7 @@ function ExtensionPopover() {
       className="absolute w-[220px] sm:w-[248px] right-3 sm:right-4"
       style={{
         top: -12,
+        maxWidth: "calc(100% - 1.5rem)",
       }}
     >
       {/* Connector notch */}

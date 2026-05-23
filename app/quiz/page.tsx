@@ -257,7 +257,7 @@ export default function QuizPage() {
       ) : null}
 
       <main
-        className="min-h-screen w-full px-6 md:px-10 py-20 md:py-28 flex items-start justify-center"
+        className="min-h-[100dvh] w-full px-6 md:px-10 py-20 md:py-28 flex items-start justify-center"
         style={{ backgroundColor: "var(--ink)" }}
       >
         <div className="w-full" style={{ maxWidth: 640 }}>

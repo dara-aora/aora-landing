@@ -46,7 +46,7 @@ export default function QuizResultPage() {
       <>
         <Nav />
         <main
-          className="min-h-screen w-full"
+          className="min-h-[100dvh] w-full"
           style={{ backgroundColor: "var(--ink)" }}
         />
         <Footer />
@@ -88,8 +88,11 @@ export default function QuizResultPage() {
 
             <h1
               id="result-heading"
-              className="mt-6 font-display font-light leading-[0.98] tracking-tightest text-[40px] sm:text-[64px] md:text-[96px] lg:text-[128px]"
-              style={{ color: "var(--paper)" }}
+              className="mt-6 font-display font-light leading-[0.98] tracking-tightest text-[40px] sm:text-[64px] md:text-[96px] lg:text-[128px] break-words hyphens-auto"
+              style={{
+                color: "var(--paper)",
+                overflowWrap: "anywhere",
+              }}
             >
               {copy.nameUpper}
             </h1>
@@ -430,7 +433,7 @@ function ExpiredResult() {
     <>
       <Nav />
       <main
-        className="min-h-screen w-full px-6 md:px-10 pt-36 md:pt-48 pb-24 md:pb-32"
+        className="min-h-[100dvh] w-full px-6 md:px-10 pt-36 md:pt-48 pb-24 md:pb-32"
         style={{ backgroundColor: "var(--ink)" }}
       >
         <div className="mx-auto" style={{ maxWidth: "48rem" }}>

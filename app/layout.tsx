@@ -4,18 +4,18 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aoramind.com"),
-  title: "Aora — A Whoop for your brain.",
+  title: "Aora - Power Up Your Mind.",
   description:
     "Aora measures cognitive load, recovery, and burnout risk. The first wearable built for the organ that runs everything.",
   openGraph: {
-    title: "Aora — A Whoop for your brain.",
+    title: "Aora - Power Up Your Mind.",
     description:
       "Measure the one thing you can't afford to lose. Take the 2-minute Brain State assessment.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aora — A Whoop for your brain.",
+    title: "Aora - Power Up Your Mind.",
     description: "Measure the one thing you can't afford to lose.",
   },
 };

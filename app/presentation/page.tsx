@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { DesktopOnlyGate } from "@/components/DesktopOnlyGate";
 
 /* ─────────────────────────────────────────────────────────────────────────────
  * AORA · Neural Monitor · Presentation
@@ -565,6 +566,17 @@ function BigNumber({ value, unit, color }: { value: string; unit?: string; color
 // Main page
 // ═════════════════════════════════════════════════════════════════════════
 export default function PresentationPage() {
+  return (
+    <DesktopOnlyGate
+      title="Open on desktop"
+      body="The Aora neural monitor demo is designed for a larger screen. Please open this page on a desktop or laptop browser."
+    >
+      <PresentationPageInner />
+    </DesktopOnlyGate>
+  );
+}
+
+function PresentationPageInner() {
   const [started, setStarted] = useState(false);
   const [elapsed, setElapsed] = useState(0);    // real monotonic elapsed
   const [sceneT, setSceneT] = useState(0);      // scene time (loops)

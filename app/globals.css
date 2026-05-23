@@ -25,6 +25,17 @@ body {
   max-width: 100vw;
 }
 
+/* Prevent any descendant from forcing horizontal overflow on small
+   viewports. Long words / monospace strings break gracefully instead
+   of busting the layout horizontally. */
+img,
+video,
+svg,
+iframe,
+canvas {
+  max-width: 100%;
+}
+
 /* ── Scroll-snap ─────────────────────────────────────────────────────
  * Each major section on the landing and product pages carries the
  * `.snap-section` class. We use `proximity` universally so the snap
@@ -45,12 +56,22 @@ body {
  */
 html {
   scroll-snap-type: y proximity;
-  scroll-padding-top: 80px;
+  /* Mobile nav is h-16 (64px); desktop nav is h-20 (80px). Match each
+     so snapped sections never get pushed under the fixed header. */
+  scroll-padding-top: 64px;
+}
+@media (min-width: 768px) {
+  html {
+    scroll-padding-top: 80px;
+  }
 }
 .snap-section {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
-  min-height: 100vh;
+  /* `svh` excludes the iOS dynamic UI (URL bar, toolbar) so
+     `min-height: 100svh` is exactly one stable viewport on mobile,
+     no overshoot on the URL bar collapse. */
+  min-height: 100svh;
 }
 /* Thin invisible rest-points used inside tall pinned scroll zones
    (like AnatomyHero's 9-card horizontal strip). When the user stops
