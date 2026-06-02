@@ -5,7 +5,7 @@ import {
   useScroll,
   useTransform,
   useMotionValueEvent,
-  useReducedMotion,
+  useReducedMotion, 
   MotionValue,
 } from "framer-motion";
 import { useRef, useState } from "react";

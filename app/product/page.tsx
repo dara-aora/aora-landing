@@ -3,7 +3,6 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ProductStickyHero } from "@/components/ProductStickyHero";
 import { ProductSpecStrip } from "@/components/ProductSpecStrip";
-import { ProductBuyCard } from "@/components/ProductBuyCard";
 import { ProductExplainer } from "@/components/ProductExplainer";
 import { FinalCTA } from "@/components/FinalCTA";
 
@@ -28,12 +27,9 @@ export const metadata: Metadata = {
 /**
  * /product — dedicated product page.
  *
- * Opens with the cinematic StickyVideo hero that used to anchor the
- * landing page: a pinned, scroll-scrubbed video with three beats
- * layered over it — the tagline Hero, the 73% stat, and the three-
- * signal measures grid. Below the pinned zone: a short spec rail,
- * the single-price buy card, the three-step explainer, and the
- * shared FinalCTA that funnels to the assessment.
+ * Opens with the cinematic StickyVideo hero with the tagline Hero
+ * and the 73% stat. Below the pinned zone: a short spec rail,
+ * the three-step explainer, and the shared FinalCTA.
  */
 export default function ProductPage() {
   return (
@@ -42,7 +38,6 @@ export default function ProductPage() {
       <main>
         <ProductStickyHero />
         <ProductSpecStrip />
-        <ProductBuyCard />
         <ProductExplainer />
         <FinalCTA />
       </main>

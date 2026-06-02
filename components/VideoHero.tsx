@@ -1,378 +1,152 @@
 "use client";
 
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-} from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { SmallCaps } from "./SmallCaps";
-import { useIsMobile } from "@/lib/useIsMobile";
+import { track } from "@/lib/track";
+
+const PREORDER_URL = "https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b";
 
 /**
- * VideoHero — Single-viewport hero, scroll-scrubbed through the
- * second half of the clip (75 % → 100 %).
+ * VideoHero — clean landing-page hero.
  *
- * `aora-hero.mp4` is paused. A rAF loop (gated by `seeked`, same
- * pattern as `StickyVideo.tsx`) maps the user's scroll position
- * across this 100svh section to `video.currentTime`, starting at
- * 75 % of the clip and scrubbing to 100 %. Scrolling down advances
- * playback; scrolling back up rewinds. When the user stops
- * scrolling the video freezes on its current frame. There is no
- * autoplay, no loop, and no replay.
- *
- * A dark overlay sits on top of the video for legibility.
- *
- * Source MP4 should be encoded all-intra for smooth frame-accurate
- * scrubbing; otherwise seeks between keyframes can stutter.
+ * Full-viewport with a photographic background and dark overlay.
+ * Headline and copy on the left, product image on the right.
  */
-
-const VIDEO_SRC = "/video/aora-hero.mp4";
-const POSTER_SRC = "/video/aora-poster.jpg";
-
-const START_PROGRESS = 0.75;
-const MAX_PROGRESS = 1.0;
-
 export function VideoHero() {
-  // Thin dispatcher — keeps hooks order stable across breakpoint flips
-  // by mounting completely separate subtrees.
-  const isMobile = useIsMobile();
-  return isMobile ? <VideoHeroMobile /> : <VideoHeroDesktop />;
-}
-
-function VideoHeroDesktop() {
   const reduced = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  // Scroll progress across the hero section itself: 0 when the
-  // section's top is at the top of the viewport, 1 when the
-  // section's bottom reaches the top of the viewport (i.e. the
-  // user has fully scrolled past the hero).
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-
-  // ── rAF-driven scrubber with seek locking ──
-  // The video is paused. Each frame we ease `currentTime` toward
-  // the scroll-derived target. Never issue a seek while the
-  // previous one is still decoding (gated by `seeked`).
-  useEffect(() => {
-    if (reduced) return;
-    const v = videoRef.current;
-    if (!v) return;
-
-    let rafId = 0;
-    let seeking = false;
-    let lastTarget = -1;
-
-    // Ensure the element is paused even if the browser autoplayed
-    // on load (some engines start playback off the poster frame).
-    v.pause();
-
-    const onSeeked = () => {
-      seeking = false;
-    };
-    v.addEventListener("seeked", onSeeked);
-
-    const onLoaded = () => {
-      v.currentTime = v.duration * START_PROGRESS;
-    };
-    if (v.readyState >= 1) onLoaded();
-    else v.addEventListener("loadedmetadata", onLoaded, { once: true });
-
-    const tick = () => {
-      const duration = v.duration;
-      if (duration && Number.isFinite(duration)) {
-        const p = scrollYProgress.get();
-        const range = MAX_PROGRESS - START_PROGRESS;
-        const target = Math.max(
-          START_PROGRESS * duration,
-          Math.min(duration * MAX_PROGRESS, START_PROGRESS * duration + p * duration * range),
-        );
-        if (!seeking) {
-          const current = v.currentTime;
-          const delta = target - current;
-          if (Math.abs(delta) > 1 / 60) {
-            // Ease by ~25% per frame — smooths wheel jitter and
-            // keeps the browser able to actually decode frames.
-            const eased = current + delta * 0.25;
-            if (Math.abs(eased - lastTarget) > 1 / 120) {
-              seeking = true;
-              lastTarget = eased;
-              v.currentTime = eased;
-            }
-          }
-        }
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    rafId = requestAnimationFrame(tick);
-    return () => {
-      cancelAnimationFrame(rafId);
-      v.removeEventListener("seeked", onSeeked);
-      v.removeEventListener("loadedmetadata", onLoaded);
-    };
-  }, [reduced, scrollYProgress]);
 
   return (
     <section
-      ref={sectionRef}
       className="relative w-full overflow-hidden"
       style={{
         height: "100svh",
-        minHeight: 560,
-        backgroundColor: "var(--ink)",
+        minHeight: 640,
       }}
       aria-labelledby="video-hero-heading"
     >
-      <h2 id="video-hero-heading" className="sr-only">
-        Aora — power up your mind
-      </h2>
-
-      {/* Video layer — paused; scrubbed by scroll. */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        muted
-        playsInline
-        preload="auto"
-        disablePictureInPicture
-        poster={POSTER_SRC}
+      {/* Full-bleed background image */}
+      <img
+        src="/hero-bg.png"
+        alt=""
         aria-hidden="true"
-      >
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
-
-{/* Dark overlay — uniform tint for second-half footage. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ backgroundColor: "rgba(10,10,10,0.55)" }}
+        className="absolute inset-0 w-full h-full object-cover"
+        draggable={false}
       />
 
-      {/* Legibility vignette — keeps copy readable without ever
-           darkening the whole video. */}
+      {/* Dark overlay for text legibility */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, rgba(10,10,10,0.15) 0%, rgba(10,10,10,0) 35%, rgba(10,10,10,0) 60%, rgba(10,10,10,0.7) 92%, rgba(10,10,10,0.9) 100%)",
+            "linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.75) 45%, rgba(10,10,10,0.55) 100%)",
         }}
       />
 
-      {/* Copy layer */}
-      <div className="relative h-full w-full flex flex-col justify-start pt-[58vh] px-6 md:px-10">
-        <div className="mx-auto w-full max-w-content">
+      <h2 id="video-hero-heading" className="sr-only">
+        Aora — Quiet power for your mind
+      </h2>
+
+      {/* Main content row */}
+      <div className="relative h-full w-full flex items-center px-6 md:px-10">
+        <div className="mx-auto w-full max-w-content flex flex-col md:flex-row items-center md:items-center justify-between gap-8 md:gap-12">
+          {/* Left: Copy block */}
           <motion.div
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
             animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="max-w-[640px]"
+            className="md:w-[52%] lg:w-[48%] shrink-0"
           >
+            <p
+              className="font-mono text-[11px] md:text-xs tracking-[0.18em] uppercase mb-5 md:mb-6"
+              style={{ color: "var(--green-bright)" }}
+            >
+              Neurotech for a calmer mind
+            </p>
+
             <h1
-              className="font-display font-light tracking-tightest leading-[1.06] text-[30px] sm:text-[38px] md:text-[48px] lg:text-[56px]"
+              className="font-display font-light tracking-tightest leading-[0.98] text-[38px] sm:text-[52px] md:text-[64px] lg:text-[76px]"
               style={{ color: "var(--paper)" }}
             >
-              POWER UP YOUR MIND
+              Quiet power
+              <br />
+              for your mind.
             </h1>
-            <div className="mt-5 md:mt-6 max-w-[560px]">
-              <SmallCaps className="block" tone="paper">
-                Mental fatigue is your biggest liability
-              </SmallCaps>
+
+            <p
+              className="mt-5 md:mt-6 text-base md:text-lg leading-relaxed max-w-[480px]"
+              style={{ color: "var(--mute)" }}
+            >
+              AORA Nano listens to your brain in real time, so you can
+              understand more, stress less, and live with clarity.
+            </p>
+
+            <div className="mt-7 md:mt-8">
               <a
-                href="https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b"
-                className="inline-flex items-center gap-2 h-11 md:h-12 px-5 md:px-6 mt-4 text-sm md:text-base font-medium transition-colors duration-150"
+                href={PREORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  track("checkout_started", { location: "hero" })
+                }
+                className="inline-flex items-center gap-2 h-12 md:h-14 px-6 md:px-8 text-sm md:text-base font-medium transition-colors duration-150"
                 style={{
                   backgroundColor: "var(--green)",
                   color: "var(--ink)",
                   borderRadius: 4,
                 }}
-                target="_blank"
-                rel="noopener noreferrer"
+                onMouseEnter={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+                    "var(--green-bright)")
+                }
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLAnchorElement).style.backgroundColor =
+                    "var(--green)")
+                }
               >
-                Order Aora Now
+                Pre-order AORA Nano
                 <span aria-hidden>→</span>
               </a>
             </div>
           </motion.div>
-        </div>
 
-        {/* Scroll hint */}
-        <div
-          className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-hint"
-          aria-hidden
-        >
-          <SmallCaps>Scroll</SmallCaps>
-          <div
-            style={{
-              width: 1,
-              height: 32,
-              backgroundColor: "var(--paper)",
-              opacity: 0.5,
-            }}
-          />
-        </div>
 
-        {/* Corner marker */}
-        <div className="absolute bottom-6 right-6 md:right-10 flex items-center gap-2">
-          <span
-            className="inline-block rounded-full live-dot"
-            style={{
-              width: 6,
-              height: 6,
-              backgroundColor: "var(--green-bright)",
-              boxShadow: "0 0 8px var(--green-bright)",
-            }}
-          />
-          <span
-            className="font-mono text-[10px] tabular-nums"
-            style={{ color: "var(--mute)", letterSpacing: "0.14em" }}
-          >
-            AORA · NANO
-          </span>
         </div>
       </div>
-    </section>
-  );
-}
 
-// ─── Mobile variant ──────────────────────────────────────────────────────
-//
-// Scroll-scrubbed video is unreliable on iOS Safari (rate-limited
-// programmatic seeks, cellular bandwidth). Below md, we render an
-// autoplay/loop background clip behind stacked copy. Identical
-// content, simpler delivery.
-
-function VideoHeroMobile() {
-  const reduced = useReducedMotion();
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v || reduced) return;
-    const play = () => {
-      const p = v.play();
-      if (p && typeof p.catch === "function") p.catch(() => {});
-    };
-    if (v.readyState >= 2) play();
-    else v.addEventListener("loadeddata", play, { once: true });
-    return () => {
-      v.removeEventListener("loadeddata", play);
-    };
-  }, [reduced]);
-
-  return (
-    <section
-      className="relative w-full overflow-hidden"
-      style={{
-        minHeight: "100svh",
-        backgroundColor: "var(--ink)",
-      }}
-      aria-labelledby="video-hero-heading-mobile"
-    >
-      <h2 id="video-hero-heading-mobile" className="sr-only">
-        Aora — power up your mind
-      </h2>
-
-      {/* Looping background video */}
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        muted
-        playsInline
-        autoPlay={!reduced}
-        loop
-        preload="metadata"
-        disablePictureInPicture
-        poster={POSTER_SRC}
-        aria-hidden="true"
+      {/* Bottom scroll hint */}
+      <div
+        className="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 scroll-hint"
+        aria-hidden
       >
-        <source
-          src="/video/aora-hero.mobile.mp4"
-          type="video/mp4"
-          media="(max-width: 768px)"
-        />
-        <source src={VIDEO_SRC} type="video/mp4" />
-      </video>
-
-      {/* Dark overlay */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{ backgroundColor: "rgba(10,10,10,0.6)" }}
-      />
-
-      {/* Vignette */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(10,10,10,0.25) 0%, rgba(10,10,10,0) 35%, rgba(10,10,10,0) 60%, rgba(10,10,10,0.7) 92%, rgba(10,10,10,0.95) 100%)",
-        }}
-      />
-
-      {/* Copy layer — centered */}
-      <div className="relative min-h-[100svh] w-full flex flex-col items-start justify-end px-6 pt-32 pb-24">
-        <div className="w-full max-w-content mx-auto">
-          <motion.div
-            initial={reduced ? { opacity: 0 } : { opacity: 0, y: 18 }}
-            animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="w-full"
-          >
-            <h1
-              className="font-display font-light tracking-tightest leading-[1.06] text-[30px] sm:text-[38px]"
-              style={{ color: "var(--paper)" }}
-            >
-              POWER UP YOUR MIND
-            </h1>
-            <div className="mt-5">
-              <SmallCaps className="block" tone="paper">
-                Mental fatigue is your biggest liability
-              </SmallCaps>
-              <a
-                href="https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b"
-                className="inline-flex items-center gap-2 h-11 px-5 mt-5 text-sm font-medium transition-colors duration-150"
-                style={{
-                  backgroundColor: "var(--green)",
-                  color: "var(--ink)",
-                  borderRadius: 4,
-                }}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Order Aora Now
-                <span aria-hidden>→</span>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Corner marker */}
+        <SmallCaps>Scroll</SmallCaps>
         <div
-          className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-6 flex items-center gap-2"
+          style={{
+            width: 1,
+            height: 32,
+            backgroundColor: "var(--paper)",
+            opacity: 0.5,
+          }}
+        />
+      </div>
+
+      {/* Bottom-right live marker */}
+      <div className="absolute bottom-6 right-6 md:right-10 flex items-center gap-2">
+        <span
+          className="inline-block rounded-full live-dot"
+          style={{
+            width: 6,
+            height: 6,
+            backgroundColor: "var(--green-bright)",
+            boxShadow: "0 0 8px var(--green-bright)",
+          }}
+        />
+        <span
+          className="font-mono text-[10px] tabular-nums"
+          style={{ color: "var(--mute)", letterSpacing: "0.14em" }}
         >
-          <span
-            className="inline-block rounded-full live-dot"
-            style={{
-              width: 6,
-              height: 6,
-              backgroundColor: "var(--green-bright)",
-              boxShadow: "0 0 8px var(--green-bright)",
-            }}
-          />
-          <span
-            className="font-mono text-[10px] tabular-nums"
-            style={{ color: "var(--mute)", letterSpacing: "0.14em" }}
-          >
-            AORA · NANO
-          </span>
-        </div>
+          AORA · NANO
+        </span>
       </div>
     </section>
   );

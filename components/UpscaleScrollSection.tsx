@@ -156,7 +156,7 @@ function DesktopSection({ reduced }: { reduced: boolean }) {
   return (
     <section
       ref={outerRef}
-      className="relative w-full snap-section"
+      className="relative w-full"
       style={{
         height: `${PIN_VH}vh`,
         backgroundColor: "var(--ink)",
@@ -359,7 +359,7 @@ function MobileSection({ reduced }: { reduced: boolean }) {
   return (
     <section
       ref={outerRef}
-      className="relative w-full snap-section"
+      className="relative w-full"
       style={{
         // 8 beats × ~70svh each keeps pacing readable on mobile
         height: `${BEATS.length * 70}svh`,

@@ -167,6 +167,7 @@ export function StickyVideo({ children, pinVh = 300 }: Props) {
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
+            style={{ transform: "translateZ(0)" }}
             muted
             playsInline
             autoPlay
@@ -219,6 +220,7 @@ export function StickyVideo({ children, pinVh = 300 }: Props) {
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
+            style={{ transform: "translateZ(0)" }}
             muted
             playsInline
             preload="auto"

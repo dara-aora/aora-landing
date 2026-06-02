@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { display, sans, mono } from "@/lib/fonts";
+import { SmoothScrollProvider } from "@/components/SmoothScrollProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -36,7 +37,9 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${sans.variable} ${mono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+      </body>
     </html>
   );
 }

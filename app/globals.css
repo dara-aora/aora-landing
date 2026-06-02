@@ -36,53 +36,13 @@ canvas {
   max-width: 100%;
 }
 
-/* ── Scroll-snap ─────────────────────────────────────────────────────
- * Each major section on the landing and product pages carries the
- * `.snap-section` class. We use `proximity` universally so the snap
- * engine only nudges the user near a section boundary — it never
- * forcibly yanks them out of a tall pinned-scroll section like the
- * AnatomyHero (horizontal card strip) or ProductHero, which are
- * intentionally NOT snap targets.
- *
- * Inside tall pinned zones like AnatomyHero we drop `.snap-beat`
- * markers — one per card in the horizontal strip — spaced evenly
- * across the section's vertical scroll range. Proximity +
- * `scroll-snap-stop: normal` means the browser softly nudges the
- * user to a fully-centered card at rest — never yanks mid-scroll.
- * One deliberate scroll gesture ≈ one card advance.
- *
- * `scroll-padding-top` keeps the top edge of the snapped section
- * below the fixed Nav (h-16 on mobile, h-20 on md+).
- */
-html {
-  scroll-snap-type: y proximity;
-  /* Mobile nav is h-16 (64px); desktop nav is h-20 (80px). Match each
-     so snapped sections never get pushed under the fixed header. */
-  scroll-padding-top: 64px;
-}
-@media (min-width: 768px) {
-  html {
-    scroll-padding-top: 80px;
-  }
-}
+/* ── Section minimum height ────────────────────────────────────────────
+ * Major landing-page sections should be at least one viewport tall so
+ * they never feel cramped. The .snap-section class previously included
+ * scroll-snap properties, but those have been removed — Lenis handles
+ * smooth scrolling, and CSS snap fights with it. */
 .snap-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
-  /* `svh` excludes the iOS dynamic UI (URL bar, toolbar) so
-     `min-height: 100svh` is exactly one stable viewport on mobile,
-     no overshoot on the URL bar collapse. */
   min-height: 100svh;
-}
-/* Thin invisible rest-points used inside tall pinned scroll zones
-   (like AnatomyHero's 9-card horizontal strip). When the user stops
-   scrolling, proximity snap softly nudges them to the nearest
-   marker — each marker corresponds to a card centered on screen. */
-.snap-beat {
-  scroll-snap-align: start;
-  scroll-snap-stop: normal;
-  height: 1px;
-  width: 1px;
-  pointer-events: none;
 }
 
 body {
@@ -162,14 +122,6 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  html {
-    scroll-snap-type: none !important;
-  }
-  .snap-section,
-  .snap-beat {
-    scroll-snap-align: none !important;
-    scroll-snap-stop: normal !important;
   }
 }
 

@@ -14,7 +14,7 @@ const STEPS = [
     n: 1,
     title: "Put it on.",
     body:
-      "You won't feel it. The device sits behind the ear and starts sensing on contact — no pairing dance, no calibration.",
+      "You won't feel it. The device sits behind the ear and starts sensing on contact. No pairing dance, no calibration.",
   },
   {
     n: 2,
@@ -26,7 +26,7 @@ const STEPS = [
     n: 3,
     title: "You get a read on the organ that runs you.",
     body:
-      "Cognitive load, recovery, and burnout trajectory — live in the browser extension and in the app. Always on. Always yours.",
+      "Cognitive load, recovery, and burnout trajectory, live in the browser extension and in the app. Always on. Always yours.",
   },
 ] as const;
 
