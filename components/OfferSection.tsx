@@ -5,15 +5,6 @@ import { track } from "@/lib/track";
 
 const PREORDER_URL = "https://buy.stripe.com/aFa7sMd4sfu18mp9m48so0b";
 
-/**
- * OfferSection — Section 6
- *
- * Rich product offer card moved from /product to the landing page.
- * Layout inspired by the reference image:
- *   - Left: product image placeholder
- *   - Center: product info, price, BUY NOW, trust badges
- *   - Right: money-back guarantee badge placeholder
- */
 export function OfferSection() {
   const reduced = useReducedMotion();
 
@@ -35,23 +26,20 @@ export function OfferSection() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Three-column layout on desktop */}
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
             {/* Left: Product image */}
             <div className="w-full lg:w-[28%] shrink-0">
               <div
-                className="relative overflow-hidden flex items-center justify-center"
+                className="relative overflow-hidden"
                 style={{
-                  aspectRatio: "3 / 4",
-                  backgroundColor: "var(--ink-raised)",
                   border: "1px solid var(--rule)",
                   borderRadius: 4,
                 }}
               >
                 <img
-                  src="/device-aora.png"
+                  src="/offer-product.png"
                   alt="Aora Nano"
-                  className="h-full w-full object-cover"
+                  className="w-full"
                   draggable={false}
                 />
               </div>
@@ -96,7 +84,7 @@ export function OfferSection() {
                     USD
                   </span>
                 </div>
-<p
+                <p
                   className="mt-2 text-sm"
                   style={{ color: "var(--mute)" }}
                 >
@@ -147,8 +135,13 @@ export function OfferSection() {
             </div>
 
             {/* Right: Money-back guarantee seal */}
-            <div className="w-full lg:w-[22%] shrink-0 flex flex-col items-center lg:items-end">
-              <GuaranteeBadge />
+            <div className="w-full lg:w-auto shrink-0 flex flex-col items-center lg:items-start lg:ml-6">
+              <img
+                src="/guarantee-badge.png"
+                alt="100% money back 30 day guarantee"
+                className="w-full max-w-[68px]"
+                draggable={false}
+              />
             </div>
           </div>
         </motion.div>
@@ -174,183 +167,6 @@ function TrustBadge({ label }: { label: string }) {
       >
         {label}
       </span>
-    </div>
-  );
-}
-
-/**
- * GuaranteeBadge — ornate circular seal in gold/bronze tones.
- *
- * SVG-based so it stays crisp at any size. No external image required.
- */
-function GuaranteeBadge() {
-  const size = 170;
-  const cx = size / 2;
-  const cy = size / 2;
-  const rOuter = size * 0.46;
-  const rInner = size * 0.38;
-
-  // Generate 12 star points around the outer ring
-  const stars = Array.from({ length: 12 }, (_, i) => {
-    const angle = (i * 360) / 12 - 90;
-    const rad = (angle * Math.PI) / 180;
-    const x = cx + rOuter * Math.cos(rad);
-    const y = cy + rOuter * Math.sin(rad);
-    return { x, y, key: i };
-  });
-
-  return (
-    <div
-      className="relative flex items-center justify-center"
-      style={{ width: size, height: size }}
-    >
-      <svg
-        width={size}
-        height={size}
-        viewBox={`0 0 ${size} ${size}`}
-        aria-label="100 percent money back guarantee 30 day guarantee"
-        className="absolute inset-0"
-      >
-        <defs>
-          {/* Gold radial gradient for the badge face */}
-          <radialGradient
-            id="badge-gold"
-            cx="50%"
-            cy="50%"
-            r="50%"
-          >
-            <stop offset="0%" stopColor="#C9A96E" stopOpacity={0.18} />
-            <stop offset="70%" stopColor="#A6884D" stopOpacity={0.08} />
-            <stop offset="100%" stopColor="#8A6F3A" stopOpacity={0} />
-          </radialGradient>
-
-          {/* Inner ring gradient */}
-          <linearGradient
-            id="badge-ring"
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor="#C9A96E" />
-            <stop offset="50%" stopColor="#A6884D" />
-            <stop offset="100%" stopColor="#8A6F3A" />
-          </linearGradient>
-        </defs>
-
-        {/* Outer glow */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={rOuter + 4}
-          fill="url(#badge-gold)"
-          opacity={0.4}
-        />
-
-        {/* Outer ring */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={rOuter}
-          fill="none"
-          stroke="url(#badge-ring)"
-          strokeWidth={1.5}
-          opacity={0.85}
-        />
-
-        {/* Dashed middle ring */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={(rOuter + rInner) / 2}
-          fill="none"
-          stroke="#C9A96E"
-          strokeWidth={0.6}
-          strokeDasharray="3 3"
-          opacity={0.5}
-        />
-
-        {/* Inner ring */}
-        <circle
-          cx={cx}
-          cy={cy}
-          r={rInner}
-          fill="none"
-          stroke="url(#badge-ring)"
-          strokeWidth={1}
-          opacity={0.7}
-        />
-
-        {/* Star decorations around outer ring */}
-        {stars.map(({ x, y, key }) => (
-          <g key={key} transform={`translate(${x}, ${y})`}>
-            <polygon
-              points="0,-4 1,-1 4,0 1,1 0,4 -1,1 -4,0 -1,-1"
-              fill="#C9A96E"
-              opacity={0.75}
-            />
-          </g>
-        ))}
-
-        {/* Curved text path: top arc — MONEY BACK */}
-        <path
-          id="arc-top"
-          d={`M ${cx - 55} ${cy - 18} A 55 55 0 0 1 ${cx + 55} ${cy - 18}`}
-          fill="none"
-        />
-        <text
-          fontSize={9}
-          letterSpacing={2}
-          fontWeight={500}
-          fill="#C9A96E"
-        >
-          <textPath href="#arc-top" startOffset="50%" textAnchor="middle">
-            MONEY BACK
-          </textPath>
-        </text>
-
-        {/* Curved text path: bottom arc — GUARANTEE */}
-        <path
-          id="arc-bottom"
-          d={`M ${cx - 55} ${cy + 32} A 55 55 0 0 0 ${cx + 55} ${cy + 32}`}
-          fill="none"
-        />
-        <text
-          fontSize={8.5}
-          letterSpacing={1.5}
-          fontWeight={500}
-          fill="#C9A96E"
-        >
-          <textPath href="#arc-bottom" startOffset="50%" textAnchor="middle">
-            GUARANTEE
-          </textPath>
-        </text>
-
-        {/* Center "100%" */}
-        <text
-          x={cx}
-          y={cy + 2}
-          textAnchor="middle"
-          fontSize={36}
-          fontWeight={300}
-          fill="#C9A96E"
-          style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-        >
-          100%
-        </text>
-
-        {/* Small bottom line — UP TO 1 YEAR */}
-        <text
-          x={cx}
-          y={cy + 44}
-          textAnchor="middle"
-          fontSize={7}
-          letterSpacing={1.5}
-          fill="#A6884D"
-        >
-          30 DAY GUARANTEE
-        </text>
-      </svg>
     </div>
   );
 }

@@ -5,9 +5,6 @@ import { BrainCareSection } from "@/components/BrainCareSection";
 import { MeasuresSection } from "@/components/MeasuresSection";
 import { HowItWorks } from "@/components/HowItWorks";
 import { OfferSection } from "@/components/OfferSection";
-import { ScienceTeaser } from "@/components/ScienceTeaser";
-import { FinalCTA } from "@/components/FinalCTA";
-import { ChromeExtensionSection } from "@/components/ChromeExtensionSection";
 import { Footer } from "@/components/Footer";
 
 export default function Home() {
@@ -26,12 +23,6 @@ export default function Home() {
         <HowItWorks />
 
         <OfferSection />
-
-        <ScienceTeaser />
-
-        <FinalCTA />
-
-        <ChromeExtensionSection />
       </main>
       <Footer />
     </>

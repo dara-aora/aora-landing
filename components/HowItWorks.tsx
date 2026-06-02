@@ -125,20 +125,16 @@ function HowItWorksDesktop() {
             <div
               className="mt-10 relative overflow-hidden"
               style={{
-                aspectRatio: "4 / 3",
-                backgroundColor: "var(--ink)",
                 border: "1px solid var(--rule)",
                 borderRadius: 2,
               }}
             >
-              <div className="flex items-center justify-center h-full w-full p-4 md:p-6">
-                <img
-                  src="/device-aora.png"
-                  alt="Aora Nano device"
-                  className="h-full w-full object-contain"
-                  draggable={false}
-                />
-              </div>
+              <img
+                src="/device-aora.png"
+                alt="Aora Nano device"
+                className="w-full object-contain"
+                draggable={false}
+              />
             </div>
           </motion.div>
 
@@ -189,7 +185,7 @@ function GridCard({
     >
       <motion.div
         animate={{ rotateY: hovered ? 180 : 0 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Front face */}
@@ -311,20 +307,16 @@ function HowItWorksMobile() {
         <div
           className="mt-10 mb-12 relative overflow-hidden"
           style={{
-            aspectRatio: "4 / 3",
-            backgroundColor: "var(--ink)",
             border: "1px solid var(--rule)",
             borderRadius: 2,
           }}
         >
-          <div className="flex items-center justify-center h-full w-full p-4 md:p-6">
-            <img
-              src="/device-aora.png"
-              alt="Aora Nano device"
-              className="h-full w-full object-contain"
-              draggable={false}
-            />
-          </div>
+          <img
+            src="/device-aora.png"
+            alt="Aora Nano device"
+            className="w-full object-contain"
+            draggable={false}
+          />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
