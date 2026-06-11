@@ -70,19 +70,27 @@ export function OfferSection() {
               </p>
 
               <div className="mt-8">
-                <div className="flex items-baseline gap-2">
-                  <span
-                    className="font-display font-light leading-none tracking-tightest text-[40px] md:text-[56px]"
-                    style={{ color: "var(--paper)" }}
-                  >
-                    $199.00
-                  </span>
-                  <span
-                    className="font-display font-light text-base md:text-lg"
-                    style={{ color: "var(--mute)" }}
-                  >
-                    USD
-                  </span>
+                <div className="flex items-center gap-3">
+                  <div className="flex items-baseline gap-2">
+                    <span
+                      className="font-display font-light leading-none tracking-tightest text-[40px] md:text-[56px]"
+                      style={{ color: "var(--paper)" }}
+                    >
+                      $199.00
+                    </span>
+                    <span
+                      className="font-display font-light text-base md:text-lg"
+                      style={{ color: "var(--mute)" }}
+                    >
+                      USD
+                    </span>
+                  </div>
+                  <img
+                    src="/guarantee-badge.png"
+                    alt="30-day money-back guarantee"
+                    className="w-12 md:w-14 ml-1"
+                    draggable={false}
+                  />
                 </div>
                 <p
                   className="mt-2 text-sm"
@@ -134,15 +142,7 @@ export function OfferSection() {
               </p>
             </div>
 
-            {/* Right: Money-back guarantee seal */}
-            <div className="w-full lg:w-auto shrink-0 flex flex-col items-center lg:items-start lg:ml-6">
-              <img
-                src="/guarantee-badge.png"
-                alt="100% money back 30 day guarantee"
-                className="w-full max-w-[68px]"
-                draggable={false}
-              />
-            </div>
+            
           </div>
         </motion.div>
       </div>
