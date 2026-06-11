@@ -37,7 +37,7 @@ export function OfferSection() {
                 }}
               >
                 <img
-                  src="/offer-product.png"
+                  src="/image2.png"
                   alt="Aora Nano"
                   className="w-full"
                   draggable={false}

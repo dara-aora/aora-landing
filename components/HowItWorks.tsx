@@ -103,7 +103,7 @@ function HowItWorksDesktop() {
             whileInView={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:w-[35%] lg:sticky lg:top-24"
+            className="lg:w-[25%] lg:sticky lg:top-24"
           >
             <SmallCaps tone="paper">System Architecture</SmallCaps>
             <h2
@@ -130,7 +130,7 @@ function HowItWorksDesktop() {
               }}
             >
               <img
-                src="/device-aora.png"
+                src="/image.png"
                 alt="Aora Nano device"
                 className="w-full object-contain"
                 draggable={false}
@@ -304,20 +304,20 @@ function HowItWorksMobile() {
           </p>
         </motion.div>
 
-        <div
-          className="mt-10 mb-12 relative overflow-hidden"
-          style={{
-            border: "1px solid var(--rule)",
-            borderRadius: 2,
-          }}
-        >
-          <img
-            src="/device-aora.png"
-            alt="Aora Nano device"
-            className="w-full object-contain"
-            draggable={false}
-          />
-        </div>
+<div
+           className="mt-10 mb-12 relative overflow-hidden max-w-[280px] mx-auto"
+           style={{
+             border: "1px solid var(--rule)",
+             borderRadius: 2,
+           }}
+         >
+           <img
+             src="/image.png"
+             alt="Aora Nano device"
+             className="w-full object-contain"
+             draggable={false}
+           />
+         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {LAYERS.map((layer, i) => {
