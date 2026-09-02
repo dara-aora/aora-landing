@@ -91,7 +91,14 @@ export function Nav() {
               className="small-caps hover:text-paper transition-colors duration-150"
               style={{ color: "var(--mute)" }}
             >
-              Product
+              Nano
+            </a>
+            <a
+              href="/ultra"
+              className="small-caps hover:text-paper transition-colors duration-150"
+              style={{ color: "var(--mute)" }}
+            >
+              Ultra
             </a>
             <a
               href="/quiz"
@@ -196,7 +203,10 @@ export function Nav() {
               Home
             </DrawerLink>
             <DrawerLink href="/product" onClick={() => setOpen(false)}>
-              Product
+              Nano
+            </DrawerLink>
+            <DrawerLink href="/ultra" onClick={() => setOpen(false)}>
+              Ultra
             </DrawerLink>
             <DrawerLink href="/blog" onClick={() => setOpen(false)}>
               Blog

@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { VideoHero } from "@/components/VideoHero";
+import { ProductChoiceSection } from "@/components/ProductChoiceSection";
 import { ProductHighlights } from "@/components/ProductHighlights";
 import { BrainCareSection } from "@/components/BrainCareSection";
 import { MeasuresSection } from "@/components/MeasuresSection";
@@ -13,6 +14,8 @@ export default function Home() {
       <Nav />
       <main>
         <VideoHero />
+
+        <ProductChoiceSection />
 
         <ProductHighlights />
 
