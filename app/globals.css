@@ -5,7 +5,8 @@
 :root {
   --ink: #0a0a0a;
   --ink-raised: #141414;
-  --paper: #f4f2ec;
+  --paper: #ffffff;
+  --paper-warm: #f4f2ec;
   --mute: #8a8a8a;
   --rule: #1f1f1f;
 

@@ -166,6 +166,79 @@ const FAQS: QA[] = [
   },
   {
     index: "10",
+    category: "Ultra",
+    question: "What is Aora Ultra?",
+    answer: (
+      <>
+        Aora Ultra is an investigational focused ultrasound program for PTSD.
+        It uses EEG-gated low-intensity focused ultrasound (LIFU) to target the
+        left amygdala. It is a research program, in development, not yet
+        available. See{" "}
+        <a
+          href="/ultra"
+          style={{
+            color: "var(--paper)",
+            borderBottom: "1px solid var(--green)",
+            paddingBottom: 1,
+          }}
+        >
+          /ultra
+        </a>{" "}
+        for details.
+      </>
+    ),
+  },
+  {
+    index: "11",
+    category: "Ultra",
+    question: "How is Ultra different from Nano?",
+    answer: (
+      <>
+        Nano measures. Ultra is the treatment-class research program. Nano is a
+        behind-the-ear wearable that tracks brain state continuously. Ultra is
+        investigational focused ultrasound targeting the trauma circuit. Two
+        different products with different purposes.
+      </>
+    ),
+  },
+  {
+    index: "12",
+    category: "Ultra",
+    question: "Is Ultra available to purchase?",
+    answer: (
+      <>
+        No. Ultra is in development. There is no price, no ship date, and no
+        FDA clearance. It is not currently treating patients. We are not
+        claiming it is a proven treatment. Email{" "}
+        <a
+          href="mailto:dev@aoramind.com"
+          style={{
+            color: "var(--paper)",
+            borderBottom: "1px solid var(--green)",
+            paddingBottom: 1,
+          }}
+        >
+          dev@aoramind.com
+        </a>{" "}
+        to express interest in future access.
+      </>
+    ),
+  },
+  {
+    index: "13",
+    category: "Ultra",
+    question: "Is Ultra a medical device or an approved treatment?",
+    answer: (
+      <>
+        No. Ultra is investigational and has not been cleared by the FDA. It is
+        a research program, not an approved treatment for PTSD or any other
+        condition. We are not claiming it currently treats patients or is a
+        proven treatment.
+      </>
+    ),
+  },
+  {
+    index: "14",
     category: "Company",
     question: "Who is behind Aora?",
     answer: (
@@ -388,7 +461,8 @@ export default function FAQPage() {
                 <ul className="mt-6 flex flex-col gap-4">
                   {[
                     { label: "Home", href: "/" },
-                    { label: "Product", href: "/product" },
+                    { label: "Nano", href: "/product" },
+                    { label: "Ultra", href: "/ultra" },
                     { label: "Blog", href: "/blog" },
                     { label: "Privacy", href: "/privacy" },
                     { label: "Terms", href: "/terms" },

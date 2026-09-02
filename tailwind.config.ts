@@ -8,6 +8,7 @@ const config: Config = {
         ink: "var(--ink)",
         "ink-raised": "var(--ink-raised)",
         paper: "var(--paper)",
+        "paper-warm": "var(--paper-warm)",
         mute: "var(--mute)",
         rule: "var(--rule)",
         green: "var(--green)",
